@@ -1,0 +1,26 @@
+{
+	"ImportPath": "github.com/anarcher/logster-docker-runner",
+	"GoVersion": "go1.4.2",
+	"Deps": [
+		{
+			"ImportPath": "github.com/mattn/go-colorable",
+			"Rev": "d67e0b7d1797975196499f79bcc322c08b9f218b"
+		},
+		{
+			"ImportPath": "github.com/mattn/go-isatty",
+			"Rev": "6152ce208cfa13d58f065348a3312b4160fb98d1"
+		},
+		{
+			"ImportPath": "github.com/mgutz/ansi",
+			"Rev": "22ddafb24adc4786c83841aa3021349818c898e4"
+		},
+		{
+			"ImportPath": "github.com/mgutz/logxi/v1",
+			"Rev": "a063fafdd2471dd8e704647235c2ac66e568417e"
+		},
+		{
+			"ImportPath": "github.com/namsral/flag",
+			"Rev": "94be8b60ecee5968ec79276ab54ce848820ee9f8"
+		}
+	]
+}
