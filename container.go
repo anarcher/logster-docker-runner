@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 )
 
-type Configs struct {
+type Config struct {
 	ID   string `json:"ID"`
 	Name string `json:"Name"`
 }
@@ -24,7 +24,7 @@ func ContainerLogFilePath(name string) (path string) {
 }
 
 func ContainerIdByName(name string) (containerId string) {
-	pattern := filepath.Join(DockerRoot, "containers/*/configs.json")
+	pattern := filepath.Join(DockerRoot, "containers/*/config.json")
 	paths, err := filepath.Glob(pattern)
 	if err != nil {
 		logger.Error("GetContainerIdByName.Glob", "err", err)
@@ -37,15 +37,15 @@ func ContainerIdByName(name string) (containerId string) {
 			logger.Error("GetContainerIdByName.ReadFile", "err", err)
 		}
 
-		configs := &Configs{}
-		err = json.Unmarshal(file, &configs)
+		config := &Config{}
+		err = json.Unmarshal(file, &config)
 		if err != nil {
 			logger.Error("GetContainerIdByName.Json", "err", err)
 
 		}
 
-		if configs.Name == "/"+name {
-			return configs.ID
+		if config.Name == "/"+name {
+			return config.ID
 		}
 	}
 

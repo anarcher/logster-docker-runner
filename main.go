@@ -54,6 +54,8 @@ func main() {
 
 	ticker := time.NewTicker(duration)
 
+	logger.Info("start logster runner")
+
 	for _ = range ticker.C {
 		logFile := ContainerLogFilePath(ContainerName)
 		if logFile == "" {

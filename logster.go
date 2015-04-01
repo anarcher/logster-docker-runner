@@ -6,7 +6,6 @@ import (
 
 func LogsterArgs(logPath string) (args []string) {
 
-	args = append(args, "-l /dev/stdout")
 	args = append(args, fmt.Sprintf("--output=%s", Output))
 
 	if Prefix != "" {
