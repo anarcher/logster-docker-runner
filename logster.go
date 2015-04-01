@@ -13,7 +13,7 @@ func LogsterArgs(logPath string) (args []string) {
 	}
 
 	if GraphiteHost != "" {
-		args = append(args, fmt.Sprintf("--graphite-host=", GraphiteHost))
+		args = append(args, fmt.Sprintf("--graphite-host=%s", GraphiteHost))
 	}
 
 	args = append(args, Parser)
