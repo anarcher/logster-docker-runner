@@ -13,7 +13,7 @@ logster:
     volume:
         - /var/lib/docker:/var/lib/docker:ro
     env:
-        - CONTAINER_NAME=log_to_s3
+        - CONTAINER_NAME=container_name
         - OUTPUT=stdout
         - PARSER=MetricLogster
         - LOGXI_FORMAT=text
