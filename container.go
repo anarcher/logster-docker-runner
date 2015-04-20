@@ -12,18 +12,22 @@ type Config struct {
 	Name string `json:"Name"`
 }
 
-func ContainerLogFilePath(name string) (path string) {
-	containerId := ContainerIdByName(name)
-	if containerId == "" {
+func ContainerLogFilePaths(name string) (paths []string) {
+	containerIds := ContainerIdsByName(name)
+	if len(containerIds) <= 0 {
 		return
 	}
 
-	filePath := fmt.Sprintf("%s-json.log", containerId)
-	path = filepath.Join(DockerRoot, "containers", containerId, filePath)
+	for _, cid := range containerIds {
+
+		filePath := fmt.Sprintf("%s-json.log", cid)
+		path := filepath.Join(DockerRoot, "containers", cid, filePath)
+		paths = append(paths, path)
+	}
 	return
 }
 
-func ContainerIdByName(name string) (containerId string) {
+func ContainerIdsByName(name string) (containerIds []string) {
 	pattern := filepath.Join(DockerRoot, "containers/*/config.json")
 	paths, err := filepath.Glob(pattern)
 	if err != nil {
@@ -45,7 +49,7 @@ func ContainerIdByName(name string) (containerId string) {
 		}
 
 		if config.Name == "/"+name {
-			return config.ID
+			containerIds = append(containerIds, config.ID)
 		}
 	}
 

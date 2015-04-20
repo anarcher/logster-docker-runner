@@ -4,12 +4,9 @@ import (
 	"github.com/mgutz/logxi/v1"
 	"github.com/namsral/flag"
 	"os"
-	"os/exec"
 	"strings"
 	"time"
 )
-
-const VERSION = "0.0.1"
 
 var logger log.Logger
 
@@ -65,23 +62,12 @@ func main() {
 	logger.Info("start logster runner")
 
 	for _ = range ticker.C {
-		logFile := ContainerLogFilePath(ContainerName)
-		if logFile == "" {
-			logger.Error("logfile not found", "file", logFile)
-			continue
+
+		//Sometimes,docker can't remove old removed container fs. Even through `docker rm` was successful. docker 1.4.1
+		for _, logPath := range ContainerLogFilePaths(ContainerName) {
+			RunLogster(logPath)
 		}
 
-		logsterArgs := LogsterArgs(logFile)
-
-		logger.Info("logster", "args", logsterArgs)
-
-		cmd := exec.Command(LogsterPath, logsterArgs...)
-		out, err := cmd.CombinedOutput()
-		if err != nil {
-			logger.Error("logster", "err", err.Error())
-		}
-
-		logger.Info("logster", "output", string(out))
 	}
 
 	logger.Info("bye")

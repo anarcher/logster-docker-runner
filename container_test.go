@@ -6,9 +6,9 @@ import (
 
 func Test_ContainerLogPath(t *testing.T) {
 	DockerRoot = "./test-fixtures/"
-	path := ContainerLogFilePath("a")
+	paths := ContainerLogFilePaths("a")
 
-	if path == "" {
+	if len(paths) <= 0 {
 		t.Error("path is empty")
 	}
 }
