@@ -40,9 +40,9 @@ func main() {
 	flag.Parse()
 
 	if Prefix != "" {
-		if strings.Contains(Prefix, "${HOSTNAME}") {
+		if strings.Contains(Prefix, "{{HOSTNAME}}") {
 			hostname, _ := os.Hostname()
-			Prefix = strings.Replace(Prefix, "${HOSTNAME}", hostname, 1)
+			Prefix = strings.Replace(Prefix, "{{HOSTNAME}}", hostname, 1)
 		}
 	}
 
